@@ -3,5 +3,4 @@ uvicorn
 sqlalchemy
 pydantic
 alembic
-sqlite3
 
