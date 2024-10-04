@@ -29,11 +29,14 @@ def get_character_by_id(id: int, db: Session = Depends(get_db)):
 
 @router.post("/character/add", response_model=CharacterResponse)
 def add_character(character: CharacterCreate, db: Session = Depends(get_db)):
-    existing_character = db.query(Character).filter(Character.name == character.name).first()
-    if existing_character:
-        raise HTTPException(status_code=400, detail="Character already exists")
-    return crud.create_character(db, character)
-
+    try:
+        existing_character = db.query(Character).filter(Character.name == character.name).first()
+        if existing_character:
+            raise HTTPException(status_code=400, detail="Character already exists")
+        return crud.create_character(db, character)
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.delete("/character/delete/{id}")
 def delete_character(id: int, db: Session = Depends(get_db)):
