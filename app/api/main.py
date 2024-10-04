@@ -23,6 +23,6 @@ async def custom_swagger_ui_html():
     return get_swagger_ui_html(
         openapi_url=app.openapi_url,
         title=app.title + " - Swagger UI",
-        swagger_favicon_url="/static/scienceandfiction-roll_99278.png",  # URL de la imagen personalizada
-        swagger_ui_parameters={"docExpansion": "none"}  # Opcional: personaliza la documentación
+        swagger_favicon_url="/static/scienceandfiction-roll_99278.png", 
+        swagger_ui_parameters={"docExpansion": "none"} 
     )

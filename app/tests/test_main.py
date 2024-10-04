@@ -4,7 +4,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.api.main import app
-from app.infrastructure.db.database import Base, get_db
+from app.domain.models import Base  # Cambia esto
+from app.infrastructure.db.database import get_db  # Mantén esto igual
 
 SQLALCHEMY_DATABASE_URL = "sqlite:///./test.db"
 engine = create_engine(SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False})
@@ -13,7 +14,11 @@ TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engin
 Base.metadata.create_all(bind=engine)
 
 # Dependency override para pruebas
+# Limpia la base de datos antes de cada prueba
 def override_get_db():
+    # Reinicia la base de datos
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
     db = TestingSessionLocal()
     try:
         yield db
@@ -24,12 +29,19 @@ app.dependency_overrides[get_db] = override_get_db
 
 client = TestClient(app)
 
+@pytest.fixture(scope="function", autouse=True)
+def setup_and_teardown_db():
+    Base.metadata.drop_all(bind=engine)
+    Base.metadata.create_all(bind=engine)
+    yield
+    Base.metadata.drop_all(bind=engine)
+
 ############### UNIT TESTS #####################################
 
 #GETALL
 
 def test_get_all_characters_empty():
-    response = client.get("/character/getAll")
+    response = client.get("/api/v1/character/getAll")
     assert response.status_code == 200
     assert response.json() == []
 
@@ -43,9 +55,9 @@ def test_get_all_characters_with_data():
         "eye_color": "blue",
         "birth_year": 19
     }
-    client.post("/character/add", json=character_data)
+    client.post("/api/v1/character/add", json=character_data)
     
-    response = client.get("/character/getAll")
+    response = client.get("/api/v1/character/getAll")
     assert response.status_code == 200
     assert len(response.json()) > 0
 
@@ -61,15 +73,15 @@ def test_get_character_by_id():
         "eye_color": "yellow",
         "birth_year": 42
     }
-    response = client.post("/character/add", json=character_data)
+    response = client.post("/api/v1/character/add", json=character_data)
     character_id = response.json()["id"]
     
-    response = client.get(f"/character/get/{character_id}")
+    response = client.get(f"/api/v1/character/get/{character_id}")
     assert response.status_code == 200
     assert response.json()["name"] == "Darth Vader"
 
 def test_get_character_by_id_not_found():
-    response = client.get("/character/get/999")
+    response = client.get("/api/v1/character/get/999")
     assert response.status_code == 404
     assert response.json() == {"detail": "Character not found"}
 
@@ -85,7 +97,7 @@ def test_add_character_success():
         "eye_color": "brown",
         "birth_year": 19
     }
-    response = client.post("/character/add", json=character_data)
+    response = client.post("/api/v1/character/add", json=character_data)
     assert response.status_code == 200
     assert response.json()["name"] == "Leia Organa"
 
@@ -99,7 +111,7 @@ def test_add_character_duplicate():
         "eye_color": "brown",
         "birth_year": 19
     }
-    response = client.post("/character/add", json=character_data)
+    response = client.post("/api/v1/character/add", json=character_data)
     assert response.status_code == 400
     assert response.json() == {"detail": "Character already exists"}
 
@@ -116,14 +128,14 @@ def test_delete_character_success():
         "eye_color": "brown",
         "birth_year": 896
     }
-    response = client.post("/character/add", json=character_data)
+    response = client.post("/api/v1/character/add", json=character_data)
     character_id = response.json()["id"]
     
-    response = client.delete(f"/character/delete/{character_id}")
+    response = client.delete(f"/api/v1/character/delete/{character_id}")
     assert response.status_code == 200
     assert response.json() == {"detail": "Character deleted successfully"}
 
 def test_delete_character_not_found():
-    response = client.delete("/character/delete/999")
+    response = client.delete("/api/v1/character/delete/999")
     assert response.status_code == 404
     assert response.json() == {"detail": "Character not found"}

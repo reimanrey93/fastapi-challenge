@@ -1,0 +1,239 @@
+{
+	"id": "4ea7e071-e9ec-49df-a20e-909404de60ef",
+	"name": "StarWarsAPI",
+	"timestamp": "2024-10-04T09:08:43.358Z",
+	"collection_id": "30860303-84997b2f-d803-460f-b443-7e1d7f5d71cf",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 7,
+	"delay": 0,
+	"persist": true,
+	"status": "finished",
+	"startedAt": "2024-10-04T09:08:38.631Z",
+	"totalFail": 0,
+	"results": [
+		{
+			"id": "b0308954-23f4-413e-bbc4-f17b14c98329",
+			"name": "get when id not found",
+			"url": "https://postman-rest-api-learner.glitch.me//info?id=1",
+			"time": 970,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				970
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "f27efb84-a98d-4769-8f95-fbee6a52580c",
+			"name": "Get data id ok",
+			"url": "https://postman-rest-api-learner.glitch.me//info?id=1",
+			"time": 278,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				278
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "65ac5203-b309-4fca-8613-5c0d617ad229",
+			"name": "Get all",
+			"url": "https://postman-rest-api-learner.glitch.me//info?id=1",
+			"time": 302,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Status code is 200": true
+			},
+			"testPassFailCounts": {
+				"Status code is 200": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				302
+			],
+			"allTests": [
+				{
+					"Status code is 200": true
+				}
+			]
+		},
+		{
+			"id": "f16b4aac-33e7-4af4-88ad-7cef8cb116f5",
+			"name": "Post data add",
+			"url": "https://postman-rest-api-learner.glitch.me//info",
+			"time": 203,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				203
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "4cb96e28-664e-426a-b5e8-177368cabab5",
+			"name": "post data add duplicate name",
+			"url": "https://postman-rest-api-learner.glitch.me//info",
+			"time": 210,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful POST request": true
+			},
+			"testPassFailCounts": {
+				"Successful POST request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				210
+			],
+			"allTests": [
+				{
+					"Successful POST request": true
+				}
+			]
+		},
+		{
+			"id": "bdc6878a-ccec-4507-86bc-52f6167798c1",
+			"name": "Delete data id not found",
+			"url": "https://postman-rest-api-learner.glitch.me//info?id=1",
+			"time": 207,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful DELETE request": true
+			},
+			"testPassFailCounts": {
+				"Successful DELETE request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				207
+			],
+			"allTests": [
+				{
+					"Successful DELETE request": true
+				}
+			]
+		},
+		{
+			"id": "233d3bf4-cab3-40c8-94e4-8a6437e6f20e",
+			"name": "Delete data id",
+			"url": "https://postman-rest-api-learner.glitch.me//info?id=1",
+			"time": 202,
+			"responseCode": {
+				"code": 200,
+				"name": "OK"
+			},
+			"tests": {
+				"Successful DELETE request": true
+			},
+			"testPassFailCounts": {
+				"Successful DELETE request": {
+					"pass": 1,
+					"fail": 0
+				}
+			},
+			"times": [
+				202
+			],
+			"allTests": [
+				{
+					"Successful DELETE request": true
+				}
+			]
+		}
+	],
+	"count": 1,
+	"totalTime": 2372,
+	"collection": {
+		"requests": [
+			{
+				"id": "b0308954-23f4-413e-bbc4-f17b14c98329",
+				"method": "GET"
+			},
+			{
+				"id": "f27efb84-a98d-4769-8f95-fbee6a52580c",
+				"method": "GET"
+			},
+			{
+				"id": "65ac5203-b309-4fca-8613-5c0d617ad229",
+				"method": "GET"
+			},
+			{
+				"id": "f16b4aac-33e7-4af4-88ad-7cef8cb116f5",
+				"method": "POST"
+			},
+			{
+				"id": "4cb96e28-664e-426a-b5e8-177368cabab5",
+				"method": "POST"
+			},
+			{
+				"id": "bdc6878a-ccec-4507-86bc-52f6167798c1",
+				"method": "DELETE"
+			},
+			{
+				"id": "233d3bf4-cab3-40c8-94e4-8a6437e6f20e",
+				"method": "DELETE"
+			}
+		]
+	}
+}
